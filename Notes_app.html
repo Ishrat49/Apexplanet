@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Note-Taking App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 650px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+      color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      color: gold;
+      margin-bottom: 25px;
+      font-size: 32px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border: 1px solid gold;
+      border-radius: 8px;
+      background-color: #2c2c2c;
+      color: #f4f4f4;
+      resize: vertical;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 22px;
+      background-color: gold;
+      border: none;
+      color: #121212;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+      background-color: #ffce00;
+    }
+
+    #notesContainer {
+      margin-top: 20px;
+    }
+
+    .note {
+      background-color: #2b2b2b;
+      border-left: 5px solid gold;
+      padding: 15px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.08);
+    }
+
+    .note p {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .note button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #8b0000;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .note button:hover {
+      background-color: #a30000;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      textarea {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>My Golden Notes</h1>
+    <textarea id="noteInput" placeholder="Write your note here..."></textarea>
+    <button onclick="addNote()">Add Note</button>
+    <div id="notesContainer"></div>
+  </div>
+
+  <script>
+    // Load notes from localStorage or initialize empty
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    // Function to display notes
+    function renderNotes() {
+      const container = document.getElementById("notesContainer");
+      container.innerHTML = "";
+      notes.forEach((note, index) => {
+        const noteDiv = document.createElement("div");
+        noteDiv.className = "note";
+        noteDiv.innerHTML = `
+          <p>${note}</p>
+          <button onclick="deleteNote(${index})">Delete</button>
+        `;
+        container.appendChild(noteDiv);
+      });
+    }
+
+    // Function to add a new note
+    function addNote() {
+      const input = document.getElementById("noteInput");
+      const noteText = input.value.trim();
+      if (noteText) {
+        notes.push(noteText);
+        localStorage.setItem("notes", JSON.stringify(notes));
+        input.value = "";
+        renderNotes();
+      }
+    }
+
+    // Function to delete a note
+    function deleteNote(index) {
+      notes.splice(index, 1);
+      localStorage.setItem("notes", JSON.stringify(notes));
+      renderNotes();
+    }
+
+    // Initial rendering
+    renderNotes();
+  </script>
+</body>
+</html>
