@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Slideshow</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <form id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search for a photo..." />
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="carousel" id="carousel">
+      <button id="prevBtn" class="nav-btn">&#10094;</button>
+      
+      <div class="carousel-inner" id="carouselInner">
+        <img id="carouselImage" src="https://source.unsplash.com/random/900x600?nature" alt="Slideshow image" />
+      </div>
+      
+      <button id="nextBtn" class="nav-btn">&#10095;</button>
+    </div>
+
+    <div class="dots" id="dotsContainer"></div>
+  </div>
+
+<div id="imageInfo" class="image-info hidden">
+  <p><strong>Photographer:</strong> <span id="photographerName"></span></p>
+  <p id="locationInfo"></p>
+  <a id="downloadLink" href="#" target="_blank">Download Photo</a>
+</div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>   
