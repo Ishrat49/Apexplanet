@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scribble Blog</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Merriweather&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <div class="logo">Scribble</div>
+    <ul class="nav-links">
+      <li><a href="#" data-page="home">Home</a></li>
+      <li><a href="#" data-page="blog">Blog</a></li>
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Sign Up</button>
+      <button id="logoutBtn" style="display:none">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Home Page -->
+    <section id="home" class="page active">
+      <h1>Welcome to <span style="color:#c3afff;">Scribble</span></h1>
+      <p class="quote" id="rotatingQuote">"Loading quote..."</p>
+      <p style="margin-top: 1rem;">A personal space where thoughts become beautiful blog posts.</p>
+      <div style="margin-top: 2rem;">
+      <button id="homeLoginBtn" class="home-btn">Login</button>
+      <button id="homeSignupBtn" class="home-btn">Sign Up</button>
+
+
+      </div>
+    </section>
+
+    <!-- Blog Page -->
+    <section id="blog" class="page">
+      <div id="postList"></div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+      <h2>About Scribble</h2>
+      <p>
+        Scribble is more than just a blog — </p>
+        <br>It's your digital notebook, a space where fleeting thoughts find a permanent place.
+Crafted with a minimalist soul and a poet's heart, Scribble is designed for those who crave simplicity, speed, and self-expression.
+Whether you're journaling your daily moments, sharing insights, or just venting into the void, Scribble makes it effortless.</br>
+<br/>No sign of servers. No clutter. No pressure.</br>
+Just you, your words, and the privacy of your browser — powered by localStorage, so your stories stay with you and only you.
+        <br/>
+        — Scribble is a quiet companion for loud minds.<br />
+      
+      </p>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- Add Post Page -->
+    <section id="addPostPage" class="page">
+      <input type="text" id="newPostTitle" placeholder="Title" class="title-input" />
+      <textarea id="newPostContent" rows="12" placeholder="Write your blog content here..." class="content-area"></textarea>
+      <input type="file" id="newPostImage" accept="image/*" />
+      <div class="post-action-buttons" style="display: flex; justify-content: space-between; width: 100%; max-width: 800px; margin: 1rem auto;">
+        <input type="text" id="newPostTag" placeholder="Tag" class="tag-input" style="flex: 1; margin-right: 1rem;" />
+        <button onclick="submitNewPost()" class="submit-btn" style="flex: 1;">Post</button>
+      </div>
+    </section>
+
+    <!-- Post View Page -->
+    <section id="postView" class="page">
+      <div id="singlePostContent"></div>
+    </section>
+  </main>
+
+  <!-- Floating Add Button -->
+  <button id="addPostBtn" title="Add Post">+</button>
+
+  <!-- Scroll to Top -->
+  <button id="scrollTop">↑</button>
+
+  <!-- Modals -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <h3>Login</h3>
+      <input type="text" id="loginUsername" placeholder="Username" />
+      <input type="password" id="loginPassword" placeholder="Password" />
+      <button onclick="handleLogin()">Login</button>
+      <button onclick="closeModal('loginModal')">Close</button>
+    </div>
+  </div>
+
+  <div class="modal" id="signupModal">
+    <div class="modal-content">
+      <h3>Sign Up</h3>
+      <input type="text" id="signupUsername" placeholder="Username" />
+      <input type="password" id="signupPassword" placeholder="Password" />
+      <button onclick="handleSignup()">Sign Up</button>
+      <button onclick="closeModal('signupModal')">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
