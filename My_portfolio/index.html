@@ -2,37 +2,514 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Photo Slideshow</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shaik Ishrat Banu | Portfolio</title>
+
+  <!-- Google Font: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="container">
-    <form id="searchForm">
-      <input type="text" id="searchInput" placeholder="Search for a photo..." />
-      <button type="submit">Search</button>
-    </form>
-
-    <div class="carousel" id="carousel">
-      <button id="prevBtn" class="nav-btn">&#10094;</button>
-      
-      <div class="carousel-inner" id="carouselInner">
-        <img id="carouselImage" src="https://source.unsplash.com/random/900x600?nature" alt="Slideshow image" />
-      </div>
-      
-      <button id="nextBtn" class="nav-btn">&#10095;</button>
+<body class="dark-theme">
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-ring"></div>
+      <div class="preloader-orb"></div>
+      <p class="preloader-text">Loading portfolio...</p>
     </div>
-
-    <div class="dots" id="dotsContainer"></div>
   </div>
 
-<div id="imageInfo" class="image-info hidden">
-  <p><strong>Photographer:</strong> <span id="photographerName"></span></p>
-  <p id="locationInfo"></p>
-  <a id="downloadLink" href="#" target="_blank">Download Photo</a>
-</div>
+  <div class="app">
+    <!-- Particle background -->
+    <canvas id="particle-canvas"></canvas>
 
-  <script src="script.js"></script>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="avatar-wrapper">
+        <!--   <div class="avatar-circle">SI</div> -->
+        </div>
+        <div class="sidebar-title-block">
+          <h1 class="sidebar-name">Shaik Ishrat Banu</h1>
+          <p class="sidebar-role">Software Engineer &amp; Data Enthusiast</p>
+        </div>
+        <button class="sidebar-close-btn" type="button" aria-label="Close sidebar" data-sidebar-close>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+      </div>
 
+      <div class="sidebar-body">
+        <div class="sidebar-section">
+          <h2 class="sidebar-heading">Contact</h2>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Email</span>
+              <a href="mailto:ibanu907@gmail.com" class="contact-value">ibanu907@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-label">Phone</span>
+              <a href="tel:+918309922302" class="contact-value">+91 8309922302</a>
+            </li>
+            <li>
+              <span class="contact-label">Location</span>
+              <span class="contact-value">Vinukonda, Andhra Pradesh, India</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <h2 class="sidebar-heading">Social</h2>
+          <div class="social-links">
+            <a href="https://github.com/Ishrat49" target="_blank" rel="noreferrer" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/shaik-ishrat-banu/"
+              target="_blank"
+              rel="noreferrer"
+              class="social-link"
+            >
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <a
+            href="#"
+            class="btn primary-btn full-width"
+            id="download-resume-btn"
+          >
+            <ion-icon name="cloud-download-outline"></ion-icon>
+            <span>Download Resume</span>
+          </a>
+          <p class="sidebar-note">
+            Connect to GitHub or LinkedIn for latest work and updates.
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main">
+      <header class="top-bar">
+        <button class="sidebar-toggle-btn" type="button" aria-label="Open sidebar" data-sidebar-toggle>
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+
+        <nav class="nav">
+          <button class="nav-link active" data-nav-link="about">
+            <ion-icon name="person-outline"></ion-icon>
+            <span>About</span>
+          </button>
+          <button class="nav-link" data-nav-link="education">
+            <ion-icon name="school-outline"></ion-icon>
+            <span>Education</span>
+          </button>
+          <button class="nav-link" data-nav-link="projects">
+            <ion-icon name="apps-outline"></ion-icon>
+            <span>Projects</span>
+          </button>
+          <button class="nav-link" data-nav-link="experience">
+            <ion-icon name="briefcase-outline"></ion-icon>
+            <span>Experience</span>
+          </button>
+          <button class="nav-link" data-nav-link="achievements">
+            <ion-icon name="trophy-outline"></ion-icon>
+            <span>Achievements</span>
+          </button>
+        </nav>
+
+        <button
+          class="theme-toggle-btn"
+          type="button"
+          aria-label="Toggle light or dark theme"
+          data-theme-toggle
+        >
+          <ion-icon class="theme-icon" name="sunny-outline"></ion-icon>
+        </button>
+      </header>
+
+      <main class="content">
+        <!-- About -->
+        <article class="page active" data-page="about">
+          <header class="page-header reveal">
+            <h2 class="page-title">About</h2>
+            <p class="page-subtitle">Who I am and what I love building.</p>
+          </header>
+
+          <section class="card about-section reveal">
+            <h3 class="section-title">About Me</h3>
+            <p class="body-text">
+              I am a Computer Science student focused on building real-world software that is clean,
+              functional, and user friendly. I enjoy transforming ideas into working products using
+              practical logic, UI design principles, and modern coding techniques.
+            </p>
+            <p class="body-text">
+              My interests include full-stack development, automation, AI-assisted applications, and
+              computer vision experiments. I love connecting the dots between backend logic,
+              intuitive interfaces, and intelligent features that solve real problems.
+            </p>
+          </section>
+
+          <section class="card-grid">
+            <article class="card service-card reveal">
+              <div class="card-icon">
+                <ion-icon name="code-slash-outline"></ion-icon>
+              </div>
+              <h3 class="section-title">Web Development</h3>
+              <p class="body-text">
+                Responsive, modern, and animated UI builds with clean structure and reusable
+                components tailored for different devices and users.
+              </p>
+            </article>
+
+            <article class="card service-card reveal">
+              <div class="card-icon">
+                <ion-icon name="sparkles-outline"></ion-icon>
+              </div>
+              <h3 class="section-title">AI &amp; Application Development</h3>
+              <p class="body-text">
+                Solving problems through automation, data-driven logic, and interactive interfaces,
+                using AI where it truly enhances the user experience.
+              </p>
+            </article>
+          </section>
+        </article>
+
+        <!-- Education (was Resume) -->
+        <article class="page" data-page="education">
+          <header class="page-header reveal">
+            <h2 class="page-title">Education</h2>
+            <p class="page-subtitle">Academic background, skills, and tools I work with.</p>
+          </header>
+
+          <section class="card reveal">
+            <h3 class="section-title">Academic Background</h3>
+            <div class="timeline">
+              <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4 class="timeline-title">B.Tech, CSE</h4>
+                  <p class="timeline-subtitle">JNTU Gurajada &bull; 2022 to 2026</p>
+                  <p class="timeline-meta">CGPA: 7.44</p>
+                </div>
+              </div>
+
+              <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4 class="timeline-title">Intermediate</h4>
+                  <p class="timeline-subtitle">Krishnaveni Junior College &bull; 2020 to 2022</p>
+                </div>
+              </div>
+
+              <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4 class="timeline-title">Secondary</h4>
+                  <p class="timeline-subtitle">Sri Adithya High School &bull; 2019 to 2020</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card reveal">
+            <h3 class="section-title">Skills</h3>
+            <div class="skills-grid">
+              <div class="skill-item reveal">
+                <div class="skill-header">
+                  <span class="skill-name">Python</span>
+                  <span class="skill-value">85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-bar-inner" style="--skill-level: 85%"></div>
+                </div>
+              </div>
+
+              <div class="skill-item reveal">
+                <div class="skill-header">
+                  <span class="skill-name">Web Development</span>
+                  <span class="skill-value">80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-bar-inner" style="--skill-level: 80%"></div>
+                </div>
+              </div>
+
+              <div class="skill-item reveal">
+                <div class="skill-header">
+                  <span class="skill-name">SQL</span>
+                  <span class="skill-value">75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-bar-inner" style="--skill-level: 75%"></div>
+                </div>
+              </div>
+
+              <div class="skill-item reveal">
+                <div class="skill-header">
+                  <span class="skill-name">
+                    Data Libraries (Pandas, NumPy, Sk-Learn, OpenCV, Matplotlib)
+                  </span>
+                  <span class="skill-value">70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-bar-inner" style="--skill-level: 70%"></div>
+                </div>
+              </div>
+
+              
+            </div>
+          </section>
+
+          <section class="card reveal">
+            <h3 class="section-title">Tools</h3>
+            <div class="chip-row">
+              <span class="chip">Git</span>
+              <span class="chip">VS Code</span>
+              <span class="chip">MySQL</span>
+              <span class="chip">Jupyter</span>
+              <span class="chip">Power BI</span>
+              <span class="chip">Excel</span>
+            </div>
+          </section>
+        </article>
+
+        <!-- Projects -->
+        <article class="page" data-page="projects">
+          <header class="page-header reveal">
+            <h2 class="page-title">Projects</h2>
+            <p class="page-subtitle">
+              A selection of applications, interfaces, and web experiences.
+            </p>
+          </header>
+
+          <section class="card reveal">
+            <div class="project-filter">
+              <button class="filter-btn active" data-filter-btn="all">All</button>
+              <button class="filter-btn" data-filter-btn="applications">Applications</button>
+              <button class="filter-btn" data-filter-btn="web-development">Web Development</button>
+            
+            </div>
+
+            <div class="project-grid">
+              <!-- Applications -->
+              <article
+                class="project-card active reveal"
+                data-filter-item
+                data-category="applications"
+              >
+                <div class="project-overlay">
+                  <div class="project-icon">
+                    <ion-icon name="scan-outline"></ion-icon>
+                  </div>
+                  <span class="project-category">Applications</span>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Math AI Web App</h3>
+                  <p class="project-desc">
+                    Solves and visualizes algebra and calculus problems using Python and
+                    Streamlit with clear plots and explanations.
+                  </p>
+                </div>
+              </article>
+
+              <article
+                class="project-card active reveal"
+                data-filter-item
+                data-category="applications"
+              >
+                <div class="project-overlay">
+                  <div class="project-icon">
+                    <ion-icon name="people-outline"></ion-icon>
+                  </div>
+                  <span class="project-category">Applications</span>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Face Recognition Attendance</h3>
+                  <p class="project-desc">
+                    Real-time detection using OpenCV with database logging for attendance
+                    tracking and reporting.
+                  </p>
+                </div>
+              </article>
+
+              <article
+                class="project-card active reveal"
+                data-filter-item
+                data-category="applications"
+              >
+                <div class="project-overlay">
+                  <div class="project-icon">
+                    <ion-icon name="wallet-outline"></ion-icon>
+                  </div>
+                  <span class="project-category">Applications</span>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Personal Budgeting App</h3>
+                  <p class="project-desc">
+                    Desktop expense tracker using Tkinter and JSON for simple insights into
+                    spending and saving patterns.
+                  </p>
+                </div>
+              </article>
+
+              <article
+                class="project-card active reveal"
+                data-filter-item
+                data-category="applications"
+              >
+                <div class="project-overlay">
+                  <div class="project-icon">
+                    <ion-icon name="game-controller-outline"></ion-icon>
+                  </div>
+                  <span class="project-category">Applications</span>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Gesture Paddle Game</h3>
+                  <p class="project-desc">
+                    Touchless game using webcam hand tracking that turns gestures into fun
+                    interactive controls.
+                  </p>
+                </div>
+              </article>
+
+              <!-- Web development -->
+              <article
+                class="project-card active reveal"
+                data-filter-item
+                data-category="web-development"
+              >
+                <div class="project-overlay">
+                  <div class="project-icon">
+                    <ion-icon name="globe-outline"></ion-icon>
+                  </div>
+                  <span class="project-category">Web Development</span>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Portfolio Website</h3>
+                  <p class="project-desc">
+                    Fully responsive and animated personal portfolio with SPA navigation,
+                    glassmorphism, and theme switching.
+                  </p>
+                </div>
+              </article>
+
+              <!-- Web design -->
+              
+            </div>
+          </section>
+        </article>
+
+        <!-- Experience -->
+        <article class="page" data-page="experience">
+          <header class="page-header reveal">
+            <h2 class="page-title">Experience</h2>
+            <p class="page-subtitle">Internships and hands-on work.</p>
+          </header>
+
+          <section class="card reveal">
+            <h3 class="section-title">Roles</h3>
+            <div class="timeline">
+              <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4 class="timeline-title">Web Development Intern</h4>
+                  <p class="timeline-subtitle">Apexplanet &bull; May 2025 to Jun 2025</p>
+                  <p class="body-text">
+                    Built responsive UIs, reusable components, and improved front-end performance
+                    across multiple pages, with a focus on smooth interactions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item reveal">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4 class="timeline-title">Data Analyst Intern</h4>
+                  <p class="timeline-subtitle">UptoSkills &bull; May 2025 to Aug 2025</p>
+                  <p class="body-text">
+                    Performed data cleaning, visualization, and reporting using Python,
+                    Power BI, and Excel, translating raw data into actionable insights.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
+
+        <!-- Achievements -->
+        <article class="page" data-page="achievements">
+          <header class="page-header reveal">
+            <h2 class="page-title">Achievements</h2>
+            <p class="page-subtitle">Highlights that shaped my journey.</p>
+          </header>
+
+          <section class="card reveal">
+            <ul class="achievement-list">
+              <li class="achievement-item reveal">
+                <div class="achievement-icon">
+                  <ion-icon name="construct-outline"></ion-icon>
+                </div>
+                <div class="achievement-content">
+                  <h3 class="achievement-title">
+                    Built 5+ end-to-end software applications
+                  </h3>
+                  <p class="body-text">
+                    Designed, implemented, and shipped multiple projects covering interfaces,
+                    backend logic, and deployment workflows.
+                  </p>
+                </div>
+              </li>
+
+              <li class="achievement-item reveal">
+                <div class="achievement-icon">
+                  <ion-icon name="layers-outline"></ion-icon>
+                </div>
+                <div class="achievement-content">
+                  <h3 class="achievement-title">
+                    Completed dual internships
+                  </h3>
+                  <p class="body-text">
+                    Gained practical experience in both web development and data analytics,
+                    bridging UI engineering with data-driven thinking.
+                  </p>
+                </div>
+              </li>
+
+              <li class="achievement-item reveal">
+                <div class="achievement-icon">
+                  <ion-icon name="ribbon-outline"></ion-icon>
+                </div>
+                <div class="achievement-content">
+                  <h3 class="achievement-title">
+                    Certifications
+                  </h3>
+                  <p class="body-text">
+                    Python, R, Cloud, IoT, Prompt Engineering, GenAI, and Data Science:
+                    strengthening both programming depth and applied AI skills.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </main>
+    </div>
+  </div>
+
+  <!-- Ionicons CDN -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <script src="main.js" defer></script>
 </body>
-</html>   
+</html>
